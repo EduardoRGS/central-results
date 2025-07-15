@@ -1,5 +1,57 @@
 # Central Results - Sistema de Gestão de Resultados de Exames
 
+## 📝 Resumo do Projeto
+
+O Central Results é uma API REST para gestão de exames médicos e pacientes, desenvolvida com foco em escalabilidade, segurança e integração com sistemas modernos de mensageria e cache. O sistema permite o cadastro, consulta, atualização e exclusão de pacientes e exames, além de autenticação de usuários e emissão de eventos assíncronos para integração com outros serviços.
+
+## 🚀 Tecnologias Utilizadas
+
+- **Java 17**: Linguagem principal, escolhida pela robustez e suporte a frameworks modernos.
+- **Spring Boot 3.5.3**: Framework para desenvolvimento rápido de aplicações Java, com suporte a REST, segurança, testes e integração.
+- **PostgreSQL**: Banco de dados relacional, utilizado para persistência dos dados.
+- **Redis**: Utilizado como cache para melhorar a performance das consultas.
+- **Apache Kafka**: Mensageria para eventos assíncronos, facilitando integração com outros sistemas.
+- **Docker & Docker Compose**: Facilita a execução e orquestração dos serviços em containers.
+- **Lombok**: Reduz o código boilerplate nas entidades e DTOs.
+- **Bucket4j**: (Planejado) Implementação de rate limiting para proteger a API contra abusos.
+- **Prometheus & Grafana**: Monitoramento e visualização de métricas da aplicação.
+- **Swagger/OpenAPI**: Documentação automática dos endpoints da API.
+
+## 🔄 Exemplo de Fluxo de Uso da API
+
+1. **Cadastro de Usuário**
+   - `POST /api/auth/register` com dados do usuário.
+2. **Login**
+   - `POST /api/auth/login` para obter o token JWT.
+3. **Cadastro de Paciente**
+   - `POST /api/patients` com o token JWT no header.
+4. **Cadastro de Exame**
+   - `POST /api/exams` vinculado a um paciente.
+5. **Emissão de Evento**
+   - Ao criar um exame, um evento é enviado para o Kafka.
+6. **Consulta de Exames/Pacientes**
+   - `GET /api/exams` e `GET /api/patients` para listar registros.
+
+### Exemplo de Payload de Cadastro de Paciente
+```json
+{
+  "name": "João da Silva",
+  "email": "joao@email.com",
+  "birthDate": "1980-05-10"
+}
+```
+
+### Exemplo de Payload de Cadastro de Exame
+```json
+{
+  "patientId": 1,
+  "type": "Hemograma",
+  "status": "PENDING"
+}
+```
+
+---
+
 ## 📋 Descrição
 
 Sistema de gestão de resultados de exames médicos desenvolvido em Spring Boot com arquitetura hexagonal. O projeto gerencia pacientes e seus exames, com integração a Kafka para eventos assíncronos e Redis para cache.
@@ -12,17 +64,6 @@ O projeto segue os princípios da Clean Architecture com as seguintes camadas:
 - **Application**: Casos de uso e serviços
 - **Infrastructure**: Configurações de banco, Kafka, Redis
 - **Web**: Controllers e DTOs
-
-## 🚀 Tecnologias
-
-- **Java 17**
-- **Spring Boot 3.5.3**
-- **PostgreSQL** - Banco de dados principal
-- **Redis** - Cache
-- **Apache Kafka** - Eventos assíncronos
-- **Docker & Docker Compose** - Containerização
-- **Lombok** - Redução de boilerplate
-- **Bucket4j** - Rate limiting (planejado)
 
 ## 📦 Pré-requisitos
 
