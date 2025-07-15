@@ -1,6 +1,6 @@
-package com.results.central_results.controller;
+package com.results.central_results.web.controller;
 
-import com.results.central_results.dto.PatientDTO;
+import com.results.central_results.web.dto.PatientDTO;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import com.results.central_results.application.service.PatientService;

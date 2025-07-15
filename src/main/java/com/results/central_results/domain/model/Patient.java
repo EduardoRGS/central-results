@@ -1,13 +1,15 @@
-package com.results.central_results.model;
+package com.results.central_results.domain.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Getter @Setter
+@Table(name = "patients")
+@Data
+@Builder
+@AllArgsConstructor @NoArgsConstructor
 public class Patient {
 
     @Id
@@ -23,4 +25,6 @@ public class Patient {
     private LocalDate birthDate;
 
     private String cpf;
+
+    private String phone;
 }
