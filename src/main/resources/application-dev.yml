@@ -1,0 +1,9 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  logging:
+    level:
+      com.results.central_results: DEBUG
+      org.springframework.kafka: DEBUG 
